@@ -1,64 +1,77 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <title>Etkinlik Güncelle</title>
-    <!-- Öğrenci numaran ile CSS bağlantısı -->
-    <link rel="stylesheet" href="css/2416501032.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Etkinlik Güncelle</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav>
-        <a href="index.html">Ana Sayfa</a> | 
-        <a href="etkinlikler.html">Tüm Etkinlikler</a> | 
-        <a href="ekle.html">Etkinlik Ekle</a>
-    </nav>
-    
-    <main>
-        <h1>Etkinlik Güncelle</h1>
-        <div id="form-message"></div>
-        <form id="add-event-form">
-            <!-- Güncelleme modülü mevcut JS'i kullanarak adresteki ID'yi yakalar -->
-            <input type="hidden" name="id" id="update-id">
-            
-            <label>Etkinlik Adı: <input type="text" name="title" id="update-title"></label><br><br>
-            <label>Tarih: <input type="date" name="date" id="update-date"></label><br><br>
-            <label>Kategori: 
-                <select name="category" id="update-category">
-                    <option value="">Seçiniz</option>
-                    <option value="Seminer">Seminer</option>
-                    <option value="Atölye">Atölye</option>
-                    <option value="Konser">Konser</option>
-                    <option value="Fuar">Fuar</option>
-                    <option value="Yarışma">Yarışma</option>
-                </select>
-            </label><br><br>
-            <button type="submit" style="background-color: #f39c12;">Değişiklikleri Kaydet</button>
-        </form>
-    </main>
 
-    <!-- Modül olarak form işleyiciyi ve güncelleme doldurucuyu çağırıyoruz -->
-    <script type="module">
-        import { events } from './js/data.js';
-        
-        // Sayfa yüklendiğinde URL'den ID'yi alıp formu doldur
-        document.addEventListener('DOMContentLoaded', () => {
-            const params = new URLSearchParams(window.location.search);
-            const id = params.get('id');
-            const event = events.find(e => e.id === id);
-            
-            if(event) {
-                document.getElementById('update-id').value = event.id;
-                document.getElementById('update-title').value = event.title;
-                document.getElementById('update-date').value = event.date;
-                document.getElementById('update-category').value = event.category;
-            } else {
-                document.getElementById('form-message').innerHTML = '<div class="error">Güncellenecek etkinlik bulunamadı veya ID eksik.</div>';
-            }
-        });
-        <div style="margin-bottom: 20px;">
-        <a href="index.html" class="btn" style="background-color: #34495e;">⬅️ Ana Sayfa</a>
+  <!-- Üst Menü -->
+  <div style="margin-bottom: 20px;">
+    <a href="index.html" class="btn" style="background-color: #34495e; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px;">⬅ Ana Sayfa</a>
+  </div>
+
+  <h2>Etkinlik Güncelle</h2>
+
+  <!-- Hata veya Bilgi Mesajı Alanı -->
+  <div id="form-message"></div>
+
+  <!-- Güncelleme Formu -->
+  <form id="update-form">
+    <!-- Gizli ID Alanı -->
+    <input type="hidden" id="update-id">
+
+    <div style="margin-bottom: 15px;">
+      <label for="update-title" style="display: block; font-weight: bold;">Etkinlik Adı:</label>
+      <input type="text" id="update-title" required style="width: 100%; padding: 8px;">
     </div>
-    </script>
-    <script type="module" src="js/event-form.js"></script>
+
+    <div style="margin-bottom: 15px;">
+      <label for="update-date" style="display: block; font-weight: bold;">Tarih:</label>
+      <input type="date" id="update-date" required style="width: 100%; padding: 8px;">
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <label for="update-category" style="display: block; font-weight: bold;">Kategori:</label>
+      <select id="update-category" required style="width: 100%; padding: 8px;">
+        <option value="">Seçiniz</option>
+        <option value="Yazılım">Yazılım</option>
+        <option value="Spor">Spor</option>
+        <option value="Sanat">Sanat</option>
+        <option value="Müzik">Müzik</option>
+      </select>
+    </div>
+
+    <button type="submit" style="width: 100%; padding: 10px; background-color: #f39c12; border: none; cursor: pointer; font-weight: bold;">
+      Değişiklikleri Kaydet
+    </button>
+  </form>
+
+  <!-- URL'den ID'yi alıp input'ları dolduran kod -->
+  <script type="module">
+    import { events } from './js/data.js';
+
+    // 1. URL'den id parametresini al (örn: ?id=1)
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+
+    // 2. data.js içinden eşleşen etkinliği bul (== ile tür dönüşümünü garantiye alıyoruz)
+    const event = events.find(e => e.id == id);
+
+    if (event) {
+      document.getElementById('update-id').value = event.id;
+      document.getElementById('update-title').value = event.title;
+      document.getElementById('update-date').value = event.date;
+      document.getElementById('update-category').value = event.category;
+    } else {
+      document.getElementById('form-message').innerHTML = '<div style="color: red; margin-bottom: 15px;">Güncellenecek etkinlik bulunamadı veya linkte ID eksik.</div>';
+    }
+  </script>
+
+  <!-- Form submit işlemini yöneten scriptin -->
+  <script type="module" src="js/event-form.js"></script>
+
 </body>
 </html>
