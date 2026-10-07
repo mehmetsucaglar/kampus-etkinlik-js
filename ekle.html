@@ -1,0 +1,22 @@
+<link rel="stylesheet" href="css/2416501032.css">
+<!-- ... Navigasyon ... -->
+<main>
+    <h1>Yeni Etkinlik Ekle</h1>
+    <div id="form-message"></div>
+    <form id="add-event-form">
+        <label>Etkinlik Adı: <input type="text" name="title"></label><br><br>
+        <label>Tarih: <input type="date" name="date"></label><br><br>
+        <label>Kategori: 
+            <select name="category">
+                <option value="">Seçiniz</option>
+                <option value="Seminer">Seminer</option>
+                <option value="Konser">Konser</option>
+            </select>
+        </label><br><br>
+        <button type="submit">Etkinlik Oluştur</button>
+    </form>
+    <div style="margin-bottom: 20px;">
+        <a href="index.html" class="btn" style="background-color: #34495e;">⬅️ Ana Sayfa</a>
+    </div>
+</main>
+<script type="module" src="js/event-form.js"></script>
