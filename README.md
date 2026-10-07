@@ -1,3 +1,5 @@
+https://kampus-etkinlik-js.vercel.app/index.html
+
 # 🎓 Kampüs Etkinlikleri (Sprint 3)
 
 Üniversite kampüsündeki etkinliklerin listelenmesi, yönetilmesi ve dinamik olarak takip edilmesi amacıyla geliştirilen **Kampüs Etkinlikleri** web uygulaması.
